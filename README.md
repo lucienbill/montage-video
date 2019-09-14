@@ -17,11 +17,26 @@ Si vous n'avez rien, surtout ne piratez pas :
 * il existe des options gratuites et légales qui fonctionnent très bien : c'est ce que j'utilise.
 
 Je recommande ces 2 programmes : 
-* [Shotcut](https://shotcut.org/download/) : très flexible au niveau des codec, simple mais efficace, je l'utilise presque tout le temps.
-* [Da Vinci Resolve](https://www.blackmagicdesign.com/fr/products/davinciresolve/) : c'est l'artillerie lourde. Très puissant et polyvalent, mais capricieux sur les codec
+* [Shotcut](https://shotcut.org/download/)
+* [Da Vinci Resolve](https://www.blackmagicdesign.com/fr/products/davinciresolve/)
 
 Note : je recommande des les installer en anglais, parce qu'on trouve plein de tutos en anglais sur youtube.
 Pour avoir essayé d'utiliser Shotcut en français : quand un tuto parle de "Rotate and scale" et que la fonctionnalité s'appelle en vrai "Mise à l'échelle et rotation", c'est pas pratique du tout.
+
+## Shotcut
+Pour monter des vidéos, il est simple et efficace, je l'utilise pour 90% de mes montages.
+Shotcut se base sur la librairie "ffmpeg" qui est ultra flexible : il sait lire et écrire dans plein de codec différents.
+
+Concrètement, cela signifie qu'on peut donner à peu près ce qu'on veut à Shotcut, il arrivera à intérpréter les signaux, et à exporter notre montage dans le codec que l'on veut (99% du temps, h264).
+
+## Da Vinci Resolve
+Ca, c'est l'artillerie lourde. Très puissant et polyvalent, permet de faire des effets spéciaux avancées et de bien retravailler les couleurs, parfait pour faire des court-métrages. 
+
+Il est capricieux sur les codec : Resolve n'aime pas travailler avec des vidéos compressées.
+Il m'est déjà arrivé de faire un montage à base de vidéos compressées : tout semblait bien fonctionner jusqu'à ce que j'exporte la vidéo : il y avait quelques soucis d'images bien pénibles qui n'étaient pas visible dans l'aperçu, mais dont je ne parvenais pas à me débarraser.
+Autrement dit : avec Resolve, ne travaillez jamais avec des vidéos compressées !
+
+**To do :** Expliquer comment régler ce problème. Resolve sait "transcoder" les vidéos. L'idée est : j'importe les vidéos source dans resolve, puis je vais dans le gestionnaire de média pour les transcoder. Une fois l'opération terminée, je vire mes sources, et les remplace par les fichiers transcodés. Attention : resolve transcode vers du .mov non compressé (ou très peu compressé) : les vidéos prennent énormément de place. Mieux vaut dérusher (c'est à dire : ne garder que les morceaux de vidéos qu'on va utiliser) avant de transcoder, sinon on va bouffer beaucoup trop de place sur son disque dur.
 
 # Les codec
 C'est, en bref, la façon dont est gérée le flux vidéo.
@@ -29,23 +44,29 @@ Spécifiquement : un codec correspond à une façon de compresser la vidéo.
 Une bonne compression permet d'avoir une belle vidéo qui ne prend pas trop de place sur le disque dur.
 Globalement, on va surtout utiliser le "h264", qui est très commun.
 
-## Shotcut
-Shotcut se base sur la librairie "ffmpeg" qui est ultra flexible.
-En bref : cette librairie sait lire et écrire dans plein de codec différents.
-Concrètement, cela signifie qu'on peut donner à peu près ce qu'on veut à Shotcut, il arrivera à intérpréter les signaux, et à exporter notre montage dans le codec que l'on veut (99% du temps, h264).
-J'utilise toujours Shotcut pour transcoder mon montage vers le bon codec avec les bon paramètres pour la plateforme que je vise (youtube, twitter, facebook...).
+Peu importe le logiciel que j'utilise pour monter, je passe toujours par Shotcut pour transcoder la vidéo vers le bon codec avec les bon paramètres pour la plateforme que je vise (youtube, twitter, facebook...).
+Transcoder = écrire une vidéo dans un autre fichier (généralement dans un autre codec, et/ou avec un autre bitrate. Exemple : prendre un DivX en 1080p et le transformer en .mp4 h264 en 720p)
 
-Transcoder = lire une vidéo, puis l'écrire dans un autre fichier (généralement dans un autre codec, et/ou avec un autre bitrate. Exemple : prendre un DivX en 1080p et le transformer en .mp4 h264 en 720p)
+## Compresser une vidéo
+Quand je transcode une vidéo pour Youtube, Twitter ou autre, je la compresse, car ces plateformes préfèrent les fichiers avec un débit de données limité.
+Pour compresser, je dis à Shotcut "écris ma vidéo dans ce fichier, avec ce bitrate".
 
-## Da Vinci Resolve
-Resolve n'aime pas travailler avec des vidéos compressées.
-Il m'est déjà arrivé de faire un montage à base de vidéos compressée : tout semblait bien fonctionner jusqu'à ce que j'exporte la vidéo : il y avait quelques soucis d'images bien pénibles qui n'étaient pas visible dans l'aperçu, mais dont je ne parvenais pas à me débarraser.
-Autrement dit : avec Resolve, ne travaillez jamais avec des vidéos compressées !
-**To do :** Expliquer comment régler ce problème. Resolve sait "transcoder" les vidéos. L'idée est : j'importe les vidéos source dans resolve, puis je vais dans le gestionnaire de média pour les transcoder. Une fois l'opération terminée, je vire mes sources, et les remplace par les fichiers transcodés. Attention : resolve transcode vers du .mov non compressé (ou très peu compressé) : les vidéos prennent énormément de place. Mieux vaut dérusher (c'est à dire : ne garder que les morceaux de vidéos qu'on va utiliser) avant de transcoder, sinon on va bouffer beaucoup trop de place sur son disque dur.
+La compression n'est pas magique : si on compresse trop fort ou trop vite, on fera de la bouillie de pixels. Généralement, je sais quel débit de données (alias **bitrate**) je ne dois pas dépasser. Je règle ensuite Shotcut pour qu'il compresse plus ou moins vite :
+* si je veux la meilleur qualité possible, je lui dis "prends tout ton temps"
+* si j'ai une grosse vidéo, que je veux l'exporter plutôt rapidement, et que j'accepte qu'il y ait une légère perte de qualité visuelle par moments, je lui dits "prends du temps pour compresser, mais reste raisonnable"
+
+C'est la [vitesse d'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune).
+**\[To do\]** : mieux expliquer
 
 ## Youtube
-**\[To do\]**
-outube est relou avec sa façon de gérer les vidéos, expliquer comment s'en sortir (parce qu'il y a la doc officelle de youtube... et la réalité de youtube)
+Pour obtenir une bonne qualité de vidéo pour Youtube, en théorie il suffit de respecter les [guidelines officielles](https://support.google.com/youtube/answer/1722171?hl=fr).
+Bien sûr en pratique, il faut faire plus que ça.
+voici les réglages d'export que j'utilise dans Shotcut : **\[To do\]**
+
+### 720p 30FPS
+### 720p 60FPS
+### 1080p 30FPS
+### 1080p 60FPS
 
 ## Twitter
 **\[To do\]**
