@@ -83,6 +83,7 @@ Pour le reste, je recommande de rester sur :
 * Deinterlacer = YADIF - temporal + spatial (best)
 * Interpolation = Bicubic ; *"Lanczos" est mieux noté : il gère mieux quand on agrandit une image... mais quand on la rétrécit (exemple : on a une vidéo en 1080p, on l'exporte en 720p), "Bicubic" semble mieux s'en sortir.*
 * Parallel processing : activé
+
 **Codec**
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Codec.PNG)
 C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
@@ -90,15 +91,18 @@ C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
 * Je fixe le "[GOP](https://fr.wikipedia.org/wiki/Group_of_pictures)" à la moitié du framerate : si j'exporte à 30 images par secondes, mon "GOP" vaudra 15.
 * J'utilise toujours 2 [B-frames](https://fr.wikipedia.org/wiki/Inter-trame)
 * Par défaut "Dual pass" est désactivé. Quand j'ai vraiment un bitrate très limité et veux une belle vidéo, je l'active. En résumé très grossier : le compresseur fait 2 passes, pour essayer de tout optimiser.
+
 **Audio**
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_AudioPNG)
 Je laisse généralement les valeurs par défaut : 
 * un "Sample rate" à 44.1 kHz, c'est bien. 48 kHz, c'est souvent mieux (mais pas toujours)
 * un bitrate supérieur à 220 kb/s, c'est bien.
 * le codec aac, c'est bien. Mais si vous exportez votre vidéo et que vous remarquez que le son est dégeulasse, particulièrement dans les aigus (on a l'impression que ça crache, que es aigus bavent, c'est désagréable), alors vous n'avez pas de chance : c'est un bug d'encodage. Refaites l'export, en choisissant "libmp3lame".
+
 **Other**
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Other.PNG)
 C'est dans cet onglet qu'on définit la [vitesse le l'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune). Plus on encode lentement, meilleur sera le résultat, mais plus il faudra être patient.
+
 **Enregistrer un preset**
 [](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Export_SavePreset.PNG)
 N'hésitez pas à enregistrer les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
@@ -130,20 +134,24 @@ Et là, magie : Youtube utilisera le bon encodeur !
 
 ## Twitter
 **\[To do\]**
+
 Twitter est relou aussi, mais différemment. La doc officielle se contredit, la bonne info est, en bref : "utiliser le codec + bitrate le plus relou à gérer"
 
 ## Facebok
 **\[To do\]**
+
 Facebook est relou aussi : la doc dit "faites ce que vous voulez, on gère ça va être bien", et il ne faut surtout pas les écouter. Pour facebook, j'utilise exactement les mêmes réglages que pour twitter : ça marche bien la plupart du temps, mais même comme ça il m'arrive d'avoir des problèmes parce que publier des vidéos sur facebook, c'est vraiment atroce.
 
 # Exemple de "workflow"
 **\[To do\]**
+
 2 exemples : 
 * J'ai un montage 'simple' à faire. Je veux faire un best of, mais je n'ai pas d'effets 3D du futur à ajouter : juste des images et des textes : j'utilise shotcut.
 * J'ai un montage de ouf à faire, avec des transitions exotiques, des fonds verts compliqués, je veux retravailler à fond les couleurs et faire des effets 3D du futur de l'espace : d'abord je dérushe avec shotcut pour ne garder que les bouts de vidéos qui m'intéressent (je peux tout exporter dans un seul fichier pour gagner du temps), puis je passe sur resolve, puis je transcode le montage final avec Shotcut.
 
 # Quelques concepts de base
 **\[To do\]**
+
 * Plusieurs pistes vidéo = pratique (pour inscruster des bouts de vidéos, des images etc)
 * Les keyframes
 * Mesurer le son (vite fait)
