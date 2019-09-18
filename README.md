@@ -77,6 +77,7 @@ En cliquant sur "Advanced", on accède à de nouveaux onglets :
 #### Video
 
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Video.PNG)
+
 Selon ce qu'on veut faire, on touchera à Resolution et Frames/sec.
 Pour le reste, je recommande de rester sur :
 * Aspect ratio = on ne touche pas (sauf rares cas)
@@ -88,6 +89,7 @@ Pour le reste, je recommande de rester sur :
 #### Codec
 
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Codec.PNG)
+
 C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
 * Tous mes presets sont en "Average Bitrate", et j'indique le bitrate maximum recommandé pour la plateforme que je vise. *Note : Je peux potentiellement obtenir de meilleurs résultats en passant sur du "constant bitrate", mais je n'ai pas pris le temps de tester.*
 * Je fixe le "[GOP](https://fr.wikipedia.org/wiki/Group_of_pictures)" à la moitié du framerate : si j'exporte à 30 images par secondes, mon "GOP" vaudra 15.
@@ -97,6 +99,7 @@ C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
 #### Audio
 
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_AudioPNG)
+
 Je laisse généralement les valeurs par défaut : 
 * un "Sample rate" à 44.1 kHz, c'est bien. 48 kHz, c'est souvent mieux (mais pas toujours)
 * un bitrate supérieur à 220 kb/s, c'est bien.
@@ -105,11 +108,13 @@ Je laisse généralement les valeurs par défaut :
 #### Other
 
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Other.PNG)
+
 C'est dans cet onglet qu'on définit la [vitesse le l'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune). Plus on encode lentement, meilleur sera le résultat, mais plus il faudra être patient.
 
 **Enregistrer un preset**
 
 [](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Export_SavePreset.PNG)
+
 N'hésitez pas à enregistrer les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
 
 ## Youtube
