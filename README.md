@@ -75,7 +75,6 @@ Sur la partie droite, on voit :
 En cliquant sur "Advanced", on accède à de nouveaux onglets :
 
 #### Video
-
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Video.PNG)
 
 Selon ce qu'on veut faire, on touchera à Resolution et Frames/sec.
@@ -87,7 +86,6 @@ Pour le reste, je recommande de rester sur :
 * Parallel processing : activé
 
 #### Codec
-
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Codec.PNG)
 
 C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
@@ -97,8 +95,7 @@ C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
 * Par défaut "Dual pass" est désactivé. Quand j'ai vraiment un bitrate très limité et veux une belle vidéo, je l'active. En résumé très grossier : le compresseur fait 2 passes, pour essayer de tout optimiser.
 
 #### Audio
-
-![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_AudioPNG)
+![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Audio.PNG)
 
 Je laisse généralement les valeurs par défaut : 
 * un "Sample rate" à 44.1 kHz, c'est bien. 48 kHz, c'est souvent mieux (mais pas toujours)
@@ -106,13 +103,11 @@ Je laisse généralement les valeurs par défaut :
 * le codec aac, c'est bien. Mais si vous exportez votre vidéo et que vous remarquez que le son est dégeulasse, particulièrement dans les aigus (on a l'impression que ça crache, que es aigus bavent, c'est désagréable), alors vous n'avez pas de chance : c'est un bug d'encodage. Refaites l'export, en choisissant "libmp3lame".
 
 #### Other
-
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Other.PNG)
 
 C'est dans cet onglet qu'on définit la [vitesse le l'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune). Plus on encode lentement, meilleur sera le résultat, mais plus il faudra être patient.
 
 **Enregistrer un preset**
-
 [](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Export_SavePreset.PNG)
 
 N'hésitez pas à enregistrer les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
@@ -143,9 +138,15 @@ Si votre video est massacrée par youtube, trichez : exportez en résolution 256
 Et là, magie : Youtube utilisera le bon encodeur !
 
 ## Twitter
-**\[To do\]**
+Twitter est relou aussi, mais différemment. La doc officielle se contredit, la bonne info est, en bref : "utiliser le codec + bitrate le plus relou à gérer" :
 
-Twitter est relou aussi, mais différemment. La doc officielle se contredit, la bonne info est, en bref : "utiliser le codec + bitrate le plus relou à gérer"
+![Preset Twitter onglet video](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Twitter_1.PNG)
+
+![Preset Twitter onglet codec](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Twitter_2.PNG)
+
+![Preset Twitter onglet audio](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Twitter_3.PNG)
+
+![Preset Twitter onglet other](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Twitter_4.PNG)
 
 ## Facebok
 **\[To do\]**
