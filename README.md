@@ -69,7 +69,7 @@ Sur la partie gauche, on voit des "presets", qui sont des pré-réglages. Ils ne
 
 Sur la partie droite, on voit :
 * un texte et une case à cocher qui parle de "hardware encoder" : on ignore ça. Le "hardware encoder", c'est la carte graphique, c'est parfois compliqué à configurer sur shotcut, et globalement ça encode plus vite mais avec une moins bonne qualité que le processeur (alias "encodeur logiciel"). Si vous avez le temps, expérimentez, sinon oubliez.
-* le bouton "Export file", qui sert à exporter le fichier (ça y est, vous êtes bilingue)
+* le bouton "Export file", qui sert à exporter le fichier (ça y est, vous êtes bilingue). Attention : quand vous exportez le fichier, pensez à préciser l'extension : vous exportez "mistouflette.mp4", pas "mistouflette".
 * Le bouton "Advanced", qui va nous permettre d'afficher les réglages avancées.
 
 En cliquant sur "Advanced", on accède à de nouveaux onglets :
