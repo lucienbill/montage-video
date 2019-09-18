@@ -74,7 +74,8 @@ Sur la partie droite, on voit :
 
 En cliquant sur "Advanced", on accède à de nouveaux onglets :
 
-**Video**
+#### Video
+
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Video.PNG)
 Selon ce qu'on veut faire, on touchera à Resolution et Frames/sec.
 Pour le reste, je recommande de rester sur :
@@ -84,7 +85,8 @@ Pour le reste, je recommande de rester sur :
 * Interpolation = Bicubic ; *"Lanczos" est mieux noté : il gère mieux quand on agrandit une image... mais quand on la rétrécit (exemple : on a une vidéo en 1080p, on l'exporte en 720p), "Bicubic" semble mieux s'en sortir.*
 * Parallel processing : activé
 
-**Codec**
+#### Codec
+
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Codec.PNG)
 C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
 * Tous mes presets sont en "Average Bitrate", et j'indique le bitrate maximum recommandé pour la plateforme que je vise. *Note : Je peux potentiellement obtenir de meilleurs résultats en passant sur du "constant bitrate", mais je n'ai pas pris le temps de tester.*
@@ -92,18 +94,21 @@ C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
 * J'utilise toujours 2 [B-frames](https://fr.wikipedia.org/wiki/Inter-trame)
 * Par défaut "Dual pass" est désactivé. Quand j'ai vraiment un bitrate très limité et veux une belle vidéo, je l'active. En résumé très grossier : le compresseur fait 2 passes, pour essayer de tout optimiser.
 
-**Audio**
+#### Audio
+
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_AudioPNG)
 Je laisse généralement les valeurs par défaut : 
 * un "Sample rate" à 44.1 kHz, c'est bien. 48 kHz, c'est souvent mieux (mais pas toujours)
 * un bitrate supérieur à 220 kb/s, c'est bien.
 * le codec aac, c'est bien. Mais si vous exportez votre vidéo et que vous remarquez que le son est dégeulasse, particulièrement dans les aigus (on a l'impression que ça crache, que es aigus bavent, c'est désagréable), alors vous n'avez pas de chance : c'est un bug d'encodage. Refaites l'export, en choisissant "libmp3lame".
 
-**Other**
+#### Other
+
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Other.PNG)
 C'est dans cet onglet qu'on définit la [vitesse le l'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune). Plus on encode lentement, meilleur sera le résultat, mais plus il faudra être patient.
 
 **Enregistrer un preset**
+
 [](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Export_SavePreset.PNG)
 N'hésitez pas à enregistrer les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
 
