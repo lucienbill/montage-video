@@ -1,8 +1,9 @@
 # montage-video
 Vous souhaitez monter des best-of pour votre streameur préféré, et mettre vos montages sur YouTube ? Voici quelques infos pour bien démarrer.
 
-Note : je ne suis pas un expert, je ne suis pas un professionnel, mais j'ai fait quelques trucs et j'ai bien galéré à trouver certaines infos. 
-Je les écrits ici pour permettre à d'autres de moins perdre de temps sur tout un tas de choses techniques qui n'ont, au final, pas grand chose à voir avec le montage à proprement parler.
+Note : 
+* je ne suis pas un expert, je ne suis pas un professionnel, mais j'ai fait quelques trucs et j'ai bien galéré à trouver certaines infos. Je les écrits ici pour permettre à d'autres de moins perdre de temps sur tout un tas de choses techniques qui n'ont, au final, pas grand chose à voir avec le montage à proprement parler.
+* Avant de mettre une vidéo en ligne, je la regarde pour vérifier que je n'ai pas loupé un truc (exemple : il peut m'arriver d'exporter avec les mauvais régalges et d'avoir de la bouillie de pixels : je ne mets pas ça directement en ligne !)
 
 # Les logiciels
 ## Mac ou PC ?
@@ -32,17 +33,17 @@ Concrètement, cela signifie qu'on peut donner à peu près ce qu'on veut à Sho
 ## Da Vinci Resolve
 Ca, c'est l'artillerie lourde. Très puissant et polyvalent, permet de faire des effets spéciaux avancées et de bien retravailler les couleurs, parfait pour faire des court-métrages. 
 
-Il est capricieux sur les codec : Resolve n'aime pas travailler avec des vidéos compressées.
+Il est capricieux sur les codec : Resolve n'aime pas travailler avec des vidéos fortement compressées.
 Il m'est déjà arrivé de faire un montage à base de vidéos compressées : tout semblait bien fonctionner jusqu'à ce que j'exporte la vidéo : il y avait quelques soucis d'images bien pénibles qui n'étaient pas visible dans l'aperçu, mais dont je ne parvenais pas à me débarraser.
-Autrement dit : avec Resolve, ne travaillez jamais avec des vidéos compressées !
+Autrement dit : avec Resolve, ne travaillez jamais avec des vidéos très compressées !
 
-**To do :** Expliquer comment régler ce problème. Resolve sait "transcoder" les vidéos. L'idée est : j'importe les vidéos source dans resolve, puis je vais dans le gestionnaire de média pour les transcoder. Une fois l'opération terminée, je vire mes sources, et les remplace par les fichiers transcodés. Attention : resolve transcode vers du .mov non compressé (ou très peu compressé) : les vidéos prennent énormément de place. Mieux vaut dérusher (c'est à dire : ne garder que les morceaux de vidéos qu'on va utiliser) avant de transcoder, sinon on va bouffer beaucoup trop de place sur son disque dur.
+**Comment régler ce soucis :** Il faut demander à Resolve de transcoder les sources vidéos vers un autre codec, puis travailler à partir des fichiers transcodés. [Cette vidéo](https://www.youtube.com/watch?v=XQ1xF0ZmltU) explique bien comment faire.
 
 # Les codec
 C'est, en bref, la façon dont est gérée le flux vidéo.
 Spécifiquement : un codec correspond à une façon de compresser la vidéo.
 Une bonne compression permet d'avoir une belle vidéo qui ne prend pas trop de place sur le disque dur.
-Globalement, on va surtout utiliser le "h264", qui est très commun.
+Globalement, on va surtout exporter "h264", qui est très commun, et on streame aussi en h264 sur Twitch.
 
 Peu importe le logiciel que j'utilise pour monter, je passe toujours par Shotcut pour transcoder la vidéo vers le bon codec avec les bon paramètres pour la plateforme que je vise (youtube, twitter, facebook...).
 Transcoder = écrire une vidéo dans un autre fichier (généralement dans un autre codec, et/ou avec un autre bitrate. Exemple : prendre un DivX en 1080p et le transformer en .mp4 h264 en 720p)
@@ -58,15 +59,74 @@ La compression n'est pas magique : si on compresse trop fort ou trop vite, on fe
 C'est la [vitesse d'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune).
 **\[To do\]** : mieux expliquer
 
+### le principe des réglages dans Shotcut
+Dans Shotcut, voici comment accéder à la fenêtre de réglage de l'export : 
+![Shotcut où trouver la fenêtre Export](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ouTrouverExport.PNG)
+
+Elle ressemble à ceci :
+![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_MenuExport.PNG)
+Sur la partie gauche, on voit des "presets", qui sont des pré-réglages. Ils ne correspondent pas tout à fait à ce que l'on veut faire ici, nous utiliserons donc nos propres presets (qui seront stockés dans "Custom").
+
+Sur la partie droite, on voit :
+* un texte et une case à cocher qui parle de "hardware encoder" : on ignore ça. Le "hardware encoder", c'est la carte graphique, c'est parfois compliqué à configurer sur shotcut, et globalement ça encode plus vite mais avec une moins bonne qualité que le processeur (alias "encodeur logiciel"). Si vous avez le temps, expérimentez, sinon oubliez.
+* le bouton "Export file", qui sert à exporter le fichier (ça y est, vous êtes bilingue)
+* Le bouton "Advanced", qui va nous permettre d'afficher les réglages avancées.
+
+En cliquant sur "Advanced", on accède à de nouveaux onglets :
+
+**Video**
+![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Video.PNG)
+Selon ce qu'on veut faire, on touchera à Resolution et Frames/sec.
+Pour le reste, je recommande de rester sur :
+* Aspect ratio = on ne touche pas (sauf rares cas)
+* Scan mode = Progressive
+* Deinterlacer = YADIF - temporal + spatial (best)
+* Interpolation = Bicubic ; *"Lanczos" est mieux noté : il gère mieux quand on agrandit une image... mais quand on la rétrécit (exemple : on a une vidéo en 1080p, on l'exporte en 720p), "Bicubic" semble mieux s'en sortir.*
+* Parallel processing : activé
+**Codec**
+![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Codec.PNG)
+C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
+* Tous mes presets sont en "Average Bitrate", et j'indique le bitrate maximum recommandé pour la plateforme que je vise. *Note : Je peux potentiellement obtenir de meilleurs résultats en passant sur du "constant bitrate", mais je n'ai pas pris le temps de tester.*
+* Je fixe le "[GOP](https://fr.wikipedia.org/wiki/Group_of_pictures)" à la moitié du framerate : si j'exporte à 30 images par secondes, mon "GOP" vaudra 15.
+* J'utilise toujours 2 [B-frames](https://fr.wikipedia.org/wiki/Inter-trame)
+* Par défaut "Dual pass" est désactivé. Quand j'ai vraiment un bitrate très limité et veux une belle vidéo, je l'active. En résumé très grossier : le compresseur fait 2 passes, pour essayer de tout optimiser.
+**Audio**
+![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_AudioPNG)
+Je laisse généralement les valeurs par défaut : 
+* un "Sample rate" à 44.1 kHz, c'est bien. 48 kHz, c'est souvent mieux (mais pas toujours)
+* un bitrate supérieur à 220 kb/s, c'est bien.
+* le codec aac, c'est bien. Mais si vous exportez votre vidéo et que vous remarquez que le son est dégeulasse, particulièrement dans les aigus (on a l'impression que ça crache, que es aigus bavent, c'est désagréable), alors vous n'avez pas de chance : c'est un bug d'encodage. Refaites l'export, en choisissant "libmp3lame".
+**Other**
+![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Other.PNG)
+C'est dans cet onglet qu'on définit la [vitesse le l'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune). Plus on encode lentement, meilleur sera le résultat, mais plus il faudra être patient.
+**Enregistrer un preset**
+[](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Export_SavePreset.PNG)
+N'hésitez pas à enregistrer les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
+
 ## Youtube
 Pour obtenir une bonne qualité de vidéo pour Youtube, en théorie il suffit de respecter les [guidelines officielles](https://support.google.com/youtube/answer/1722171?hl=fr).
 Bien sûr en pratique, il faut faire plus que ça.
-voici les réglages d'export que j'utilise dans Shotcut : **\[To do\]**
+voici les réglages d'export spéciaux que j'utilise dans Shotcut :
 
 ### 720p 30FPS
+Onglet Video (ça, ce n'est pas une déviation, ça illustre juste ce que "720p 30FPS" signifie):
+* Resolution = 1280x720
+* Frames/sec = 30
+Onglet Other :
+* preset=faster
+Pour du 720p à 30 images/seconde, avec un débit maximum de 5Mb, on peut se permetre de compresser relativement vite.
 ### 720p 60FPS
-### 1080p 30FPS
+Onglet Other :
+* preset=faster
 ### 1080p 60FPS
+Là, c'est compliqué. J'essaie d'abord d'encoder avec les réglages des guidelines officielles, et un "preset=fast" ou "preset=medium". Ensuite je la vérifie : la qualité est bonne.
+Puis j'exporte sur Youtube... et là, Youtube à beau me dire qu'il lit en 1080p à 60FPS, c'est ultra moche.
+Une vraie bouillie de pixels.
+
+C'est "normal".
+En bref, Youtube a un encodeur de bonne qualité (VP9), et un de moins bonne qualité, et tout n'est pas sytématiquement encodé en VP9 (détails [ici](https://www.reddit.com/r/youtube/comments/7cbcpm/guide_if_your_videos_are_not_popular_youtube/)).
+Si votre video est massacrée par youtube, trichez : exportez en résolution 2560x1440 (bitrate=24Mb/s).
+Et là, magie : Youtube utilisera le bon encodeur !
 
 ## Twitter
 **\[To do\]**
