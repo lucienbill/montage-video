@@ -25,10 +25,15 @@ Note : je recommande des les installer en anglais, parce qu'on trouve plein de t
 Pour avoir essayé d'utiliser Shotcut en français : quand un tuto parle de "Rotate and scale" et que la fonctionnalité s'appelle en vrai "Mise à l'échelle et rotation", c'est pas pratique du tout.
 
 ## Shotcut
-Pour monter des vidéos, il est simple et efficace, je l'utilise pour 90% de mes montages.
+Pour monter des vidéos courtes, il est simple et efficace, je l'utilise pour 90% de mes montages.
 Shotcut se base sur la librairie "ffmpeg" qui est ultra flexible : il sait lire et écrire dans plein de codec différents.
 
 Concrètement, cela signifie qu'on peut donner à peu près ce qu'on veut à Shotcut, il arrivera à intérpréter les signaux, et à exporter notre montage dans le codec que l'on veut (99% du temps, h264).
+
+Par contre, sur un montage type "best of de stream" où on ajoute plein d'effets sonores et visuels (même des effets très simples, comme des images et quelques fonds verts), il utilise beaucoup de ressources.
+Sur ma machine (Ryzen 2600 à 3.9 GHz, 16 Go de RAM et RTX 2060), au delà de 8 minutes de best of j'ai de gros ralentissements.
+ * Quand ce genre de ralentissement arrive (parce que je n'avais pas prévu à l'avance qu'il allait ramer à mort), je triche. J'arrête d'ajouer les effets et je fais un rendu. Ensuite, je fais un nouveau projet : j'importe mon rendu, et là je continue mon montage (c'est à dire : ajouter plein d'effets débiles)
+ * Si je sais d'avance que je vais avoir un gros montage, je dérushe avec Shotcut, puis je monte avec Resolve. **TODO** : balancer un petit exemple vidéo pour illuster.
 
 ## Da Vinci Resolve
 Ca, c'est l'artillerie lourde. Très puissant et polyvalent, permet de faire des effets spéciaux avancées et de bien retravailler les couleurs, parfait pour faire des court-métrages. 
