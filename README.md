@@ -3,7 +3,7 @@ Vous souhaitez monter des best-of pour votre streameur préféré, et mettre vos
 
 Note : 
 * je ne suis pas un expert, je ne suis pas un professionnel, mais j'ai fait quelques trucs et j'ai bien galéré à trouver certaines infos. Je les écrits ici pour permettre à d'autres de moins perdre de temps sur tout un tas de choses techniques qui n'ont, au final, pas grand chose à voir avec le montage à proprement parler.
-* Avant de mettre une vidéo en ligne, je la regarde pour vérifier que je n'ai pas loupé un truc (exemple : il peut m'arriver d'exporter avec les mauvais régalges et d'avoir de la bouillie de pixels : je ne mets pas ça directement en ligne !)
+* Avant de mettre une vidéo en ligne, je la regarde pour vérifier que je n'ai pas loupé un truc (exemple : il peut m'arriver d'exporter avec les mauvais réglages et d'avoir de la bouillie de pixels : je ne mets pas ça directement en ligne !)
 
 # Les logiciels
 ## Mac ou PC ?
@@ -14,7 +14,7 @@ Autrement dit : vous pouvez utiliser les logiciels que je propose, peu importe l
 ## Quels logiciels utiliser ?
 Si vous avez une licence pour un logiciel que vous maîtrisez déjà (exemple : Adobe Première), la question ne se pose pas : utilisez ce que vous avez déjà.
 Si vous n'avez rien, surtout ne piratez pas : 
-* c'est illégal
+* c'est illégal ; sachant que vous comptez exploiter très publiquement les résultats de l'utilisation du logiciel, c'est une très mauvaise idée.
 * il existe des options gratuites et légales qui fonctionnent très bien : c'est ce que j'utilise.
 
 Je recommande ces 2 programmes : 
@@ -32,7 +32,7 @@ Concrètement, cela signifie qu'on peut donner à peu près ce qu'on veut à Sho
 
 Par contre, sur un montage type "best of de stream" où on ajoute plein d'effets sonores et visuels (même des effets très simples, comme des images et quelques fonds verts), il utilise beaucoup de ressources.
 Sur ma machine (Ryzen 2600 à 3.9 GHz, 16 Go de RAM et RTX 2060), au delà de 8 minutes de best of j'ai de gros ralentissements.
- * Quand ce genre de ralentissement arrive (parce que je n'avais pas prévu à l'avance qu'il allait ramer à mort), je triche. J'arrête d'ajouer les effets et je fais un rendu. Ensuite, je fais un nouveau projet : j'importe mon rendu, et là je continue mon montage (c'est à dire : ajouter plein d'effets débiles)
+ * Quand ce genre de ralentissement arrive (parce que je n'avais pas prévu à l'avance qu'il allait ramer à mort), je triche. J'arrête d'ajouter les effets et je fais un rendu. Ensuite, je fais un nouveau projet : j'importe mon rendu, et là je continue mon montage (c'est à dire : ajouter plein d'effets débiles)
  * Si je sais d'avance que je vais avoir un gros montage, je dérushe avec Shotcut, puis je monte avec Resolve. **TODO** : balancer un petit exemple vidéo pour illuster.
 
 ## Da Vinci Resolve
@@ -58,7 +58,7 @@ Quand je transcode une vidéo pour Youtube, Twitter ou autre, je la compresse, c
 Pour compresser, je dis à Shotcut "écris ma vidéo dans ce fichier, avec ce bitrate".
 
 La compression n'est pas magique : si on compresse trop fort ou trop vite, on fera de la bouillie de pixels. Généralement, je sais quel débit de données (alias **bitrate**) je ne dois pas dépasser. Je règle ensuite Shotcut pour qu'il compresse plus ou moins vite :
-* si je veux la meilleur qualité possible, je lui dis "prends tout ton temps"
+* si je veux la meilleure qualité possible, je lui dis "prends tout ton temps"
 * si j'ai une grosse vidéo, que je veux l'exporter plutôt rapidement, et que j'accepte qu'il y ait une légère perte de qualité visuelle par moments, je lui dits "prends du temps pour compresser, mais reste raisonnable"
 
 C'est la [vitesse d'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune).
@@ -73,7 +73,7 @@ Elle ressemble à ceci :
 Sur la partie gauche, on voit des "presets", qui sont des pré-réglages. Ils ne correspondent pas tout à fait à ce que l'on veut faire ici, nous utiliserons donc nos propres presets (qui seront stockés dans "Custom").
 
 Sur la partie droite, on voit :
-* un texte et une case à cocher qui parle de "hardware encoder" : on ignore ça. Le "hardware encoder", c'est la carte graphique, c'est parfois compliqué à configurer sur shotcut, et globalement ça encode plus vite mais avec une moins bonne qualité que le processeur (alias "encodeur logiciel"). Si vous avez le temps, expérimentez, sinon oubliez.
+* un texte et une case à cocher qui parle de "hardware encoder" : ça signifie "je veux encoder avec la carte graphique". Si on a une carte graphique supportant la 7ième génération d'encodeur NVENC ([liste ici](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new)), c'est une option intéressante : elle peut vous faire gagner du temps sans trop perdre en qualité. Sinon, désactivez la.
 * le bouton "Export file", qui sert à exporter le fichier (ça y est, vous êtes bilingue). Attention : quand vous exportez le fichier, pensez à préciser l'extension : vous exportez "mistouflette.mp4", pas "mistouflette".
 * Le bouton "Advanced", qui va nous permettre d'afficher les réglages avancées.
 
@@ -93,29 +93,30 @@ Pour le reste, je recommande de rester sur :
 #### Codec
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Codec.PNG)
 
-C'est ici qu'on dit "on choisit l'encordeur libx264, qui encodre en h264".
+C'est ici qu'on dit "on choisit l'encordeur libx264 (ou son équivalent h264_nvenc), qui encodre en h264" 
 * Tous mes presets sont en "Average Bitrate", et j'indique le bitrate maximum recommandé pour la plateforme que je vise. *Note : Je peux potentiellement obtenir de meilleurs résultats en passant sur du "constant bitrate", mais je n'ai pas pris le temps de tester.*
 * Je fixe le "[GOP](https://fr.wikipedia.org/wiki/Group_of_pictures)" à la moitié du framerate : si j'exporte à 30 images par secondes, mon "GOP" vaudra 15.
 * J'utilise toujours 2 [B-frames](https://fr.wikipedia.org/wiki/Inter-trame)
-* Par défaut "Dual pass" est désactivé. Quand j'ai vraiment un bitrate très limité et veux une belle vidéo, je l'active. En résumé très grossier : le compresseur fait 2 passes, pour essayer de tout optimiser.
+* Par défaut "Dual pass" est désactivé. Quand j'ai vraiment un bitrate très limité et veux une belle vidéo, je l'active. En résumé très grossier : le compresseur fait 2 passes, pour essayer de tout optimiser. Je ne l'utilise que pour les vidéos Twitter.
 
 #### Audio
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Audio.PNG)
 
 Je laisse généralement les valeurs par défaut : 
 * un "Sample rate" à 44.1 kHz, c'est bien. 48 kHz, c'est souvent mieux (mais pas toujours)
-* un bitrate supérieur à 220 kb/s, c'est bien.
+* un bitrate supérieur à 220 kb/s, c'est bien (quand la plateforme le permet)
 * le codec aac, c'est bien. Mais si vous exportez votre vidéo et que vous remarquez que le son est dégeulasse, particulièrement dans les aigus (on a l'impression que ça crache, que es aigus bavent, c'est désagréable), alors vous n'avez pas de chance : c'est un bug d'encodage. Refaites l'export, en choisissant "libmp3lame".
 
 #### Other
 ![](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_ExportAdvanced_Other.PNG)
 
 C'est dans cet onglet qu'on définit la [vitesse le l'encodage](https://trac.ffmpeg.org/wiki/Encode/H.264#a2.Chooseapresetandtune). Plus on encode lentement, meilleur sera le résultat, mais plus il faudra être patient.
+En bref : si votre contenu bouge beaucoup (exemple : une partie d'Overwatch), encoder plus lentemeent permettra d'améliorer la qualité. Si le contenu bouge peu (exemple : vous parlez devant la caméra), un encodage rapide sera suffisant.
 
 **Enregistrer un preset**
 [](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Export_SavePreset.PNG)
 
-N'hésitez pas à enregistrer les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
+Enregistrez les presets que vous utilisez souvent. C'est ce que je fais (on les voit dans "Custom")
 
 ## Youtube
 Pour obtenir une bonne qualité de vidéo pour Youtube, en théorie il suffit de respecter les [guidelines officielles](https://support.google.com/youtube/answer/1722171?hl=fr).
@@ -134,7 +135,7 @@ Onglet Other :
 * preset=faster
 ### 1080p 60FPS
 Là, c'est compliqué. J'essaie d'abord d'encoder avec les réglages des guidelines officielles, et un "preset=fast" ou "preset=medium". Ensuite je la vérifie : la qualité est bonne.
-Puis j'exporte sur Youtube... et là, Youtube à beau me dire qu'il lit en 1080p à 60FPS, c'est ultra moche.
+Puis j'exporte sur Youtube... et là, Youtube a beau me dire qu'il lit en 1080p à 60FPS, c'est ultra moche.
 Une vraie bouillie de pixels.
 
 C'est "normal".
@@ -144,6 +145,7 @@ Et là, magie : Youtube utilisera le bon encodeur !
 
 ## Twitter
 Twitter est relou aussi, mais différemment. La doc officielle se contredit, la bonne info est, en bref : "utiliser le codec + bitrate le plus relou à gérer" :
+
 
 ![Preset Twitter onglet video](https://github.com/lucienbill/montage-video/blob/master/images/shotcut_Twitter_1.PNG)
 
